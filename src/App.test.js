@@ -6,3 +6,9 @@ test("renders the heading", () => {
     const heading = screen.getByText(/Todo List & Notes/i);
     expect(heading).toBeInTheDocument();
 });
+
+test("the initial count is zero", () => {
+    render(<App />);
+    const countText = document.getElementById('countText')
+    expect(countText).toHaveTextContent('The button has been clicked 0 times')
+});
