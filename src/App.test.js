@@ -9,6 +9,18 @@ test("renders the heading", () => {
 
 test("the initial count is zero", () => {
     render(<App />);
-    const countText = document.getElementById('countText')
-    expect(countText).toHaveTextContent('The button has been clicked 0 times')
+    const countText = document.getElementById("countText");
+    expect(countText).toHaveTextContent("The button has been clicked 0 times");
+});
+
+test("renders the list of notes", () => {
+    render(<App />);
+    const list = document.getElementsByClassName("noteList");
+    expect(list).toBeTruthy();
+});
+
+test("renders the sample note", () => {
+    render(<App />);
+    const noteList = document.getElementsByTagName("li");
+    expect(noteList[0]).toHaveTextContent("Start my to-do list");
 });
