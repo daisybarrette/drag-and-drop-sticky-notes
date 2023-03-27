@@ -13,13 +13,7 @@ function List({ notes }) {
 }
 
 function App() {
-    const [count, setCount] = useState(0);
     const [notes, setNotes] = useState([{ content: "Start my to-do list" }]);
-
-    function handleClick() {
-        setCount(count + 1);
-        console.log("the button was clicked");
-    }
 
     function handleAddNote(newNote) {
         const updatedNotes = [...notes, newNote];
@@ -30,12 +24,6 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <h1>Todo List & Notes</h1>
-
-                <button id="countButton" onClick={handleClick}>
-                    {"+"}
-                </button>
-
-                <h2 id="countText">{`The button has been clicked ${count} times`}</h2>
 
                 <button id="addNote" onClick={handleAddNote}>
                     {"+"}

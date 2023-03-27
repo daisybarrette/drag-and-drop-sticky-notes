@@ -7,12 +7,6 @@ test("renders the heading", () => {
     expect(heading).toBeInTheDocument();
 });
 
-test("the initial count is zero", () => {
-    render(<App />);
-    const countText = document.getElementById("countText");
-    expect(countText).toHaveTextContent("The button has been clicked 0 times");
-});
-
 test("renders the list of notes", () => {
     render(<App />);
     const list = document.getElementsByClassName("noteList");
