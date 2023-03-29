@@ -6,9 +6,32 @@ function List({ notes }) {
     return (
         <ul className="noteList">
             {notes.map((note, index) => (
-                <li key={index}>{`${note.content}`}</li>
+                <li key={index} className="note">{`${note.content}`}</li>
             ))}
         </ul>
+    );
+}
+
+function Form({ addNote }) {
+    const [content, setContent] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!content) {
+            return;
+        }
+        console.log("a new item is added...", content);
+        addNote({
+            content: content,
+        });
+
+        setContent("")
+    };
+
+    return (
+        <form id="newNoteForm" onSubmit={handleSubmit}>
+            <input id="newNoteInput" className="note" type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+        </form>
     );
 }
 
@@ -29,7 +52,11 @@ function App() {
                     {"+"}
                 </button>
 
+                <Form addNote={handleAddNote} />
+
+
                 <List notes={notes} />
+
             </header>
         </div>
     );
