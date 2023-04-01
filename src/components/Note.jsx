@@ -4,7 +4,7 @@ import React from 'react';
 function Note({ note, index, handleRemoveNote }) {
     return (
         <li
-            key={index}
+            key={`note-${index}`} //@TODO hash the content here for a better key
             className='note'
         >
             {/* <button className='removeNote'>{'x'}</button> */}

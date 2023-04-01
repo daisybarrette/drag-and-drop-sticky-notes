@@ -2,20 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import Note from './components/Note';
 
-function List({ notes }) {
-    console.log(notes);
-    return (
-        <ul className='noteList'>
-            {notes.map((note, index) => (
-                <Note
-                    note={note}
-                    index={index}
-                />
-            ))}
-        </ul>
-    );
-}
-
 function Form({ addNote }) {
     const [content, setContent] = useState('');
 
@@ -77,7 +63,14 @@ function App() {
 
                 <Form addNote={handleAddNote} />
 
-                <List notes={notes} />
+                <ul className='noteList'>
+                    {notes.map((note, index) => (
+                        <Note
+                            note={note}
+                            index={index}
+                        />
+                    ))}
+                </ul>
             </header>
         </div>
     );
