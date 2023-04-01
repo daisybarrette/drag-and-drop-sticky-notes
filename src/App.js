@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+import Note from './components/Note';
 
 function List({ notes }) {
     console.log(notes);
     return (
         <ul className='noteList'>
             {notes.map((note, index) => (
-                <li
-                    key={index}
-                    className='note'
-                >
-                    {`${note.content}`}
-                </li>
+                <Note
+                    note={note}
+                    index={index}
+                />
             ))}
         </ul>
     );
@@ -56,6 +55,13 @@ function App() {
         const updatedNotes = [...notes, newNote];
         setNotes(updatedNotes);
     }
+
+    // function handleRemoveNote(noteIndex) {
+    //     console.log('removing note with index: ', noteIndex);
+    //     const updatedNotes = [...notes];
+    //     updatedNotes.splice(noteIndex, 1);
+    //     setNotes(updatedNotes);
+    // }
 
     return (
         <div className='App'>
