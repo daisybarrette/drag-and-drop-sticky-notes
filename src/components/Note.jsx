@@ -4,10 +4,15 @@ import React from 'react';
 function Note({ note, index, handleRemoveNote }) {
     return (
         <li
-            key={`note-${index}`} //@TODO hash the content here for a better key
+            key={note.id}
             className='note'
         >
-            {/* <button className='removeNote'>{'x'}</button> */}
+            <button
+                className='removeNote'
+                onClick={() => handleRemoveNote(index)}
+            >
+                {'x'}
+            </button>
             {`${note.content}`}
         </li>
     );

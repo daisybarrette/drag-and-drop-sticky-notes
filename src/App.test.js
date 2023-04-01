@@ -51,3 +51,13 @@ test('saves the new note in the note list when the form is submitted', async () 
 
     expect(noteList[1]).toHaveTextContent('hello world');
 });
+
+test('allows users to delete a note', async () => {
+    render(<App />);
+    const noteList = document.getElementsByTagName('li');
+    const removeButton = noteList[0].childNodes[0]
+
+    fireEvent.click(removeButton)
+
+    expect(noteList).toHaveLength(0)
+});
