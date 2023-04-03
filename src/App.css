@@ -20,6 +20,13 @@
     color: white;
 }
 
+.noteList {
+    list-style: none;
+    background: #e9e9f4;
+    border-radius: 0.4em;
+    padding: 4em;
+}
+
 li.note {
     list-style-type: none;
 }

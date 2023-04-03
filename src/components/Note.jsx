@@ -1,20 +1,34 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+
 // @TODO add proptypes
 
 function Note({ note, index, handleRemoveNote }) {
     return (
-        <li
+        <Draggable
             key={note.id}
-            className='note'
+            draggableId={note.id}
+            index={index}
         >
-            <button
-                className='removeNote'
-                onClick={() => handleRemoveNote(index)}
-            >
-                {'x'}
-            </button>
-            {`${note.content}`}
-        </li>
+            {(provided) => (
+                <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    index={index}
+                    key={note.id}
+                    className='note'
+                >
+                    <button
+                        className='removeNote'
+                        onClick={() => handleRemoveNote(index)}
+                    >
+                        {'x'}
+                    </button>
+                    {`${note.content}`}
+                </li>
+            )}
+        </Draggable>
     );
 }
 

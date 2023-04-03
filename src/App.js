@@ -74,7 +74,6 @@ function App() {
                                 className='noteList'
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
-                                style={{ background: 'pink', padding: '4em' }}
                             >
                                 {provided.placeholder}
                                 {notes.map((note, index) => (
