@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import './App.css';
 import Note from './components/Note';
@@ -68,16 +69,18 @@ function App() {
 
                 <Form addNote={handleAddNote} />
 
-                <ul className='noteList'>
-                    {notes.map((note, index) => (
-                        <Note
-                            key={note.id} //need this
-                            note={note}
-                            index={index}
-                            handleRemoveNote={handleRemoveNote}
-                        />
-                    ))}
-                </ul>
+                <DragDropContext onDragEnd={(result) => console.log('done dragging', result)}>
+                    <ul className='noteList'>
+                        {notes.map((note, index) => (
+                            <Note
+                                key={note.id}
+                                note={note}
+                                index={index}
+                                handleRemoveNote={handleRemoveNote}
+                            />
+                        ))}
+                    </ul>
+                </DragDropContext>
             </header>
         </div>
     );
