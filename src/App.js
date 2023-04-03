@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import './App.css';
 import Note from './components/Note';
@@ -14,7 +14,6 @@ function Form({ addNote }) {
         if (!content) {
             return;
         }
-        console.log('a new item is added...', content);
         addNote({
             content: content,
             id: newId,
@@ -49,7 +48,6 @@ function App() {
     }
 
     function handleRemoveNote(noteIndex) {
-        console.log('removing note with index: ', noteIndex);
         const updatedNotes = [...notes];
         updatedNotes.splice(noteIndex, 1);
         setNotes(updatedNotes);
@@ -70,16 +68,26 @@ function App() {
                 <Form addNote={handleAddNote} />
 
                 <DragDropContext onDragEnd={(result) => console.log('done dragging', result)}>
-                    <ul className='noteList'>
-                        {notes.map((note, index) => (
-                            <Note
-                                key={note.id}
-                                note={note}
-                                index={index}
-                                handleRemoveNote={handleRemoveNote}
-                            />
-                        ))}
-                    </ul>
+                    <Droppable droppableId='toDoNoteList'>
+                        {(provided) => (
+                            <ul
+                                className='noteList'
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                style={{ background: 'pink', padding: '4em' }}
+                            >
+                                {provided.placeholder}
+                                {notes.map((note, index) => (
+                                    <Note
+                                        key={note.id}
+                                        note={note}
+                                        index={index}
+                                        handleRemoveNote={handleRemoveNote}
+                                    />
+                                ))}
+                            </ul>
+                        )}
+                    </Droppable>
                 </DragDropContext>
             </header>
         </div>
