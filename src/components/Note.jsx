@@ -17,7 +17,6 @@ function Note({ note, index, handleRemoveNote }) {
                     {...provided.dragHandleProps}
                     index={index}
                     key={note.id}
-                    className='note'
                 >
                     <button
                         className='removeNote'
@@ -25,7 +24,7 @@ function Note({ note, index, handleRemoveNote }) {
                     >
                         {'x'}
                     </button>
-                    {`${note.content}`}
+                    <div className='note'>{`${note.content}`}</div>
                 </li>
             )}
         </Draggable>

@@ -51,9 +51,30 @@ h2::before {
     min-height: 18em;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin: 0;
+
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-li.note {
+
+.noteList li {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+
+    /* for debugging */
+    /* border: 2px solid green; */
+}
+
+
+button.removeNote {
+    align-self: flex-end;
+}
+
+
+.note {
     list-style-type: none;
     background-color: rgb(245, 245, 133);
     background: radial-gradient(circle, rgba(255, 253, 171, 1) 0%, rgba(245, 245, 133, 1) 100%);
@@ -63,4 +84,9 @@ li.note {
     font-family: 'Shadows Into Light', cursive;
     margin: 0.6rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+
+
+    /* for debugging */
+    /* border: 2px solid purple; */
 }
