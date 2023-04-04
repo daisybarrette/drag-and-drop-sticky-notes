@@ -4,40 +4,6 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import Note from './components/Note';
 
-function Form({ addNote }) {
-    const [content, setContent] = useState('');
-
-    const newId = uuid();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!content) {
-            return;
-        }
-        addNote({
-            content: content,
-            id: newId,
-            list: 'toDo',
-        });
-
-        setContent('');
-    };
-
-    return (
-        <form
-            id='newNoteForm'
-            onSubmit={handleSubmit}
-        >
-            <label htmlFor='newNoteInput'>Add a new note: </label>
-            <input
-                id='newNoteInput'
-                type='text'
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-            />
-        </form>
-    );
-}
-
 function App() {
     const sampleNote = { content: 'Start my to-do list', id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65', list: 'toDo' };
     const sampleCompletedNote = { content: 'buy groceries', id: '19e6395a-0ba2-4ab5-x230-7e8325e5dd4a', list: 'done' };
@@ -48,7 +14,7 @@ function App() {
         const updatedNotes = {
             toDo: [...notes.toDo, newNote],
             done: [...notes.done],
-        }
+        };
 
         setNotes(updatedNotes);
     }
@@ -57,7 +23,7 @@ function App() {
         const updatedNotes = {
             toDo: [...notes.toDo],
             done: [...notes.done],
-        }
+        };
 
         updatedNotes[noteList].splice(noteIndex, 1);
         setNotes(updatedNotes);
@@ -124,6 +90,40 @@ function App() {
                 </DragDropContext>
             </main>
         </div>
+    );
+}
+
+function Form({ addNote }) {
+    const [content, setContent] = useState('');
+
+    const newId = uuid();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!content) {
+            return;
+        }
+        addNote({
+            content: content,
+            id: newId,
+            list: 'toDo',
+        });
+
+        setContent('');
+    };
+
+    return (
+        <form
+            id='newNoteForm'
+            onSubmit={handleSubmit}
+        >
+            <label htmlFor='newNoteInput'>Add a new note: </label>
+            <input
+                id='newNoteInput'
+                type='text'
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+            />
+        </form>
     );
 }
 
