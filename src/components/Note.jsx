@@ -20,7 +20,7 @@ function Note({ note, index, handleRemoveNote }) {
                 >
                     <button
                         className='removeNote'
-                        onClick={() => handleRemoveNote(index)}
+                        onClick={() => handleRemoveNote(note.list, index)}
                     >
                         {'x'}
                     </button>

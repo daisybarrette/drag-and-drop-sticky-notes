@@ -16,6 +16,7 @@ function Form({ addNote }) {
         addNote({
             content: content,
             id: newId,
+            list: 'toDo',
         });
 
         setContent('');
@@ -26,7 +27,7 @@ function Form({ addNote }) {
             id='newNoteForm'
             onSubmit={handleSubmit}
         >
-            <label htmlFor="newNoteInput">Add a new note: </label>
+            <label htmlFor='newNoteInput'>Add a new note: </label>
             <input
                 id='newNoteInput'
                 type='text'
@@ -38,18 +39,56 @@ function Form({ addNote }) {
 }
 
 function App() {
-    const sampleNote = { content: 'Start my to-do list', id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65' };
-    const [notes, setNotes] = useState([sampleNote]);
+    const sampleNote = { content: 'Start my to-do list', id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65', list: 'toDo' };
+    const sampleCompletedNote = { content: 'buy groceries', id: '19e6395a-0ba2-4ab5-x230-7e8325e5dd4a', list: 'done' };
+
+    const [notes, setNotes] = useState({ toDo: [sampleNote], done: [sampleCompletedNote] });
 
     function handleAddNote(newNote) {
-        const updatedNotes = [...notes, newNote];
+        const updatedNotes = {
+            toDo: [...notes.toDo, newNote],
+            done: [...notes.done],
+        }
+
         setNotes(updatedNotes);
     }
 
-    function handleRemoveNote(noteIndex) {
-        const updatedNotes = [...notes];
-        updatedNotes.splice(noteIndex, 1);
+    function handleRemoveNote(noteList, noteIndex) {
+        const updatedNotes = {
+            toDo: [...notes.toDo],
+            done: [...notes.done],
+        }
+
+        updatedNotes[noteList].splice(noteIndex, 1);
         setNotes(updatedNotes);
+    }
+
+    function handleOnDragEnd(result) {
+        const { destination, source, draggableId } = result;
+        // console.log('done dragging', result);
+
+        // if (!destination) {
+        //     return;
+        // }
+
+        // if (destination.droppableId === source.droppableId && destination.index === source.index) {
+        //     return;
+        // }
+
+        // console.log(notes)
+        // const droppedNote = notes.find(note => note.id === draggableId)
+        // const droppedNoteIndex = notes.indexOf(droppedNote)
+
+        // const list = source.droppableId === 'toDoNoteList'
+        //     ? notes
+        //     :
+
+        // console.log(droppedNote)
+
+        // const updatedNotes = [...notes];
+        // updatedNotes.splice(droppedNoteIndex, 1);
+        // updatedNotes.splice(destination.index, 0, droppedNote)
+        // setNotes(updatedNotes);
     }
 
     return (
@@ -62,7 +101,7 @@ function App() {
                 <Form addNote={handleAddNote} />
 
                 <h2>To do:</h2>
-                <DragDropContext onDragEnd={(result) => console.log('done dragging', result)}>
+                <DragDropContext onDragEnd={handleOnDragEnd}>
                     <Droppable droppableId='toDoNoteList'>
                         {(provided) => (
                             <ul
@@ -71,7 +110,7 @@ function App() {
                                 ref={provided.innerRef}
                             >
                                 {provided.placeholder}
-                                {notes.map((note, index) => (
+                                {notes.toDo.map((note, index) => (
                                     <Note
                                         key={note.id}
                                         note={note}
