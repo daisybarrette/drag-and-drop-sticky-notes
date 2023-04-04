@@ -5,15 +5,19 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Note from './components/Note';
 
 function App() {
-    const sampleNote = { content: 'Start my to-do list', id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65', list: 'toDo' };
-    const sampleCompletedNote = { content: 'buy groceries', id: '19e6395a-0ba2-4ab5-x230-7e8325e5dd4a', list: 'done' };
+    const sampleNote = {
+        content: 'Start my to-do list',
+        id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
+        list: 'toDoNoteList',
+    };
+    const sampleCompletedNote = { content: 'buy groceries', id: '19e6395a-0ba2-4ab5-x230-7e8325e5dd4a', list: 'completedNoteList' };
 
-    const [notes, setNotes] = useState({ toDo: [sampleNote], done: [sampleCompletedNote] });
+    const [notes, setNotes] = useState({ toDoNoteList: [sampleNote], completedNoteList: [sampleCompletedNote] });
 
     function handleAddNote(newNote) {
         const updatedNotes = {
-            toDo: [...notes.toDo, newNote],
-            done: [...notes.done],
+            toDoNoteList: [...notes.toDoNoteList, newNote],
+            completedNoteList: [...notes.completedNoteList],
         };
 
         setNotes(updatedNotes);
@@ -21,8 +25,8 @@ function App() {
 
     function handleRemoveNote(noteList, noteIndex) {
         const updatedNotes = {
-            toDo: [...notes.toDo],
-            done: [...notes.done],
+            toDoNoteList: [...notes.toDoNoteList],
+            completedNoteList: [...notes.completedNoteList],
         };
 
         updatedNotes[noteList].splice(noteIndex, 1);
@@ -30,31 +34,32 @@ function App() {
     }
 
     function handleOnDragEnd(result) {
-        const { destination, source, draggableId } = result;
-        // console.log('done dragging', result);
+        const { destination, source } = result;
 
-        // if (!destination) {
-        //     return;
-        // }
+        if (!destination) {
+            return;
+        }
 
-        // if (destination.droppableId === source.droppableId && destination.index === source.index) {
-        //     return;
-        // }
+        if (destination.droppableId === source.droppableId && destination.index === source.index) {
+            return;
+        }
 
-        // console.log(notes)
-        // const droppedNote = notes.find(note => note.id === draggableId)
-        // const droppedNoteIndex = notes.indexOf(droppedNote)
+        const sourceList = source.droppableId;
+        const destinationList = destination.droppableId;
+        const droppedNote = notes[sourceList][source.index];
 
-        // const list = source.droppableId === 'toDoNoteList'
-        //     ? notes
-        //     :
+        const updatedNotes = {
+            toDoNoteList: [...notes.toDoNoteList],
+            completedNoteList: [...notes.completedNoteList],
+        };
 
-        // console.log(droppedNote)
+        // Note was moved within the same list, not between lists
+        if (sourceList === destinationList) {
+            updatedNotes[sourceList].splice(source.index, 1);
+            updatedNotes[sourceList].splice(destination.index, 0, droppedNote);
+        }
 
-        // const updatedNotes = [...notes];
-        // updatedNotes.splice(droppedNoteIndex, 1);
-        // updatedNotes.splice(destination.index, 0, droppedNote)
-        // setNotes(updatedNotes);
+        setNotes(updatedNotes);
     }
 
     return (
@@ -76,7 +81,7 @@ function App() {
                                 ref={provided.innerRef}
                             >
                                 {provided.placeholder}
-                                {notes.toDo.map((note, index) => (
+                                {notes.toDoNoteList.map((note, index) => (
                                     <Note
                                         key={note.id}
                                         note={note}
@@ -105,7 +110,7 @@ function Form({ addNote }) {
         addNote({
             content: content,
             id: newId,
-            list: 'toDo',
+            list: 'toDoNoteList',
         });
 
         setContent('');
