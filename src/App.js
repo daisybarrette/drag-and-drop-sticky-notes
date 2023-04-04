@@ -26,9 +26,9 @@ function Form({ addNote }) {
             id='newNoteForm'
             onSubmit={handleSubmit}
         >
+            <label htmlFor="newNoteInput">Add a new note: </label>
             <input
                 id='newNoteInput'
-                className='note'
                 type='text'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -59,13 +59,6 @@ function App() {
             </header>
 
             <main>
-                {/* <button
-                    id='addNote'
-                    onClick={handleAddNote}
-                >
-                    {'+'}
-                </button> */}
-
                 <Form addNote={handleAddNote} />
 
                 <h2>To do:</h2>
