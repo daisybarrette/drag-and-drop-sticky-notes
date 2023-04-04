@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import './App.css';
 import Note from './components/Note';
 
 function Form({ addNote }) {
@@ -57,16 +56,19 @@ function App() {
         <div className='App'>
             <header className='App-header'>
                 <h1>Todo List & Notes</h1>
+            </header>
 
-                <button
+            <main>
+                {/* <button
                     id='addNote'
                     onClick={handleAddNote}
                 >
                     {'+'}
-                </button>
+                </button> */}
 
                 <Form addNote={handleAddNote} />
 
+                <h2>To do:</h2>
                 <DragDropContext onDragEnd={(result) => console.log('done dragging', result)}>
                     <Droppable droppableId='toDoNoteList'>
                         {(provided) => (
@@ -88,7 +90,7 @@ function App() {
                         )}
                     </Droppable>
                 </DragDropContext>
-            </header>
+            </main>
         </div>
     );
 }
