@@ -2,7 +2,17 @@
     --wood-light: #eacda3;
     --wood-dark: #d6ae7b;
     --paper: #faf0e3;
-    --text: var(--text);
+
+    /* rename this var */
+    /* Alice Blue */
+    --paper: #f0f8ff;
+
+    --text-light: white;
+    /* Astro navy blue */
+    --text-dark: #002D62;
+
+    /* Magic blue */
+    --dark-accent: #0077c0;
 }
 
 body {
@@ -11,38 +21,24 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background: #eacda3; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #d6ae7b, #eacda3); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-        var(--wood-dark),
-        var(--wood-light)
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* Light Sky Blue background, Magic Blue SVG */
+    background: #87cefa;
 }
 
-/* body::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.4;
-    background: url(/public/cork-board.webp) var(--wood-light);
-    background-position: center center;
-    background-blend-mode: unset;
-    background-size: contain;
-} */
-
 .App {
+    display: flex;
+    flex-direction: column;
+
     min-height: 100vh;
     height: 100%;
-    font-size: 16px;
     font-size: calc(10px + 2vmin);
-    color: var(--text);
+    color: var(--text-light);
 
-    /* for the background image... not sure if using yet */
-    /* position: relative; */
+    background: url(/public/waves.svg) transparent;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 h1,
@@ -50,6 +46,10 @@ h2 {
     margin: 0;
     padding: 0.5em;
     text-align: center;
+}
+
+h1 {
+    font-family: 'Bungee Shade', cursive;
 }
 
 h2 {
@@ -61,6 +61,7 @@ h2 {
     justify-content: space-evenly;
 
     margin-top: 2em;
+    margin-bottom: 1em;
 
     width: 100%;
     overflow-x: auto;
@@ -76,9 +77,10 @@ h2 {
 
 #newNoteInput {
     font-family: 'Roboto Condensed', sans-serif;
-    color: var(--text);
-    background-color: var(--paper);
     font-size: 1em;
+
+    background-color: var(--paper);
+    color: var(--text-dark);
 }
 
 /* #newNoteInput:focus,
@@ -131,4 +133,30 @@ button.removeNote {
     color: black;
     font-family: 'Shadows Into Light', cursive;
     font-size: 0.9em;
+}
+
+footer {
+    background-color: var(--dark-accent);
+
+    margin:0;
+    margin-top: auto;
+    font-size: 16px;
+    text-align: center;
+    padding: 1em 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: double underline;
+}
+
+footer a:hover,
+footer a:focus {
+    color: white;
+    text-decoration: none;
+    font-style: italic;
 }

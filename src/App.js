@@ -124,6 +124,13 @@ function App() {
                     </div>
                 </DragDropContext>
             </main>
+
+            <footer>
+                <p>
+                    by <a href='https://www.daisybarrette.com/'>Daisy Barrette</a> on{' '}
+                    <a href='https://github.com/daisybarrette'>GitHub</a>
+                </p>
+            </footer>
         </div>
     );
 }
