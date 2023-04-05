@@ -4,7 +4,7 @@ import App from './App';
 
 test('renders the heading', () => {
     render(<App />);
-    const heading = screen.getByText(/Todo List & Notes/i);
+    const heading = screen.getByText(/Drag and drop sticky notes/i);
     expect(heading).toBeInTheDocument();
 });
 
@@ -52,12 +52,12 @@ test('saves the new note in the note list when the form is submitted', async () 
     expect(noteList[1]).toHaveTextContent('hello world');
 });
 
-test('allows users to delete a note', async () => {
+test('allows users to delete a To Do note', async () => {
     render(<App />);
-    const noteList = document.getElementsByTagName('li');
-    const removeButton = noteList[0].childNodes[0]
+    const toDoNoteList = document.getElementsByClassName('toDoNoteList')[0].getElementsByTagName('li');
+    const removeButton = toDoNoteList[0].childNodes[0]
 
     fireEvent.click(removeButton)
 
-    expect(noteList).toHaveLength(0)
+    expect(toDoNoteList).toHaveLength(0)
 });

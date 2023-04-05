@@ -27,6 +27,11 @@ body {
     color: #613f14;
 }
 
+
+.listLayout {
+    display: flex;
+}
+
 #newNoteInput {
     font-family: 'Roboto Condensed', sans-serif;
     color: #613f14;
@@ -43,7 +48,8 @@ h2::before {
     background-color: var(--paper);
 }
 
-.noteList {
+.toDoNoteList,
+.completedNoteList {
     list-style: none;
     background-color: var(--paper);
     border-radius: 0.4em;
@@ -52,14 +58,13 @@ h2::before {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin: 0;
 
-
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-
-.noteList li {
+.toDoNoteList li,
+.completedNoteList li {
     width: max-content;
     display: flex;
     flex-direction: column;
@@ -68,11 +73,9 @@ h2::before {
     /* border: 2px solid green; */
 }
 
-
 button.removeNote {
     align-self: flex-end;
 }
-
 
 .note {
     list-style-type: none;
@@ -84,8 +87,6 @@ button.removeNote {
     font-family: 'Shadows Into Light', cursive;
     margin: 0.6rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-
 
     /* for debugging */
     /* border: 2px solid purple; */

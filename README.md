@@ -1,3 +1,6 @@
 # Drag and drop sticky notes
 
-This is a simple to-do app built with ReactJS and deployed with Netlify. You can see it here: [https://sticky-note-todos.netlify.app/](https://sticky-note-todos.netlify.app/).
+A to-do app that allows users to drag and drop sticky notes into different columns. Built with [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd).
+
+
+You can see it here: [https://drag-and-drop-sticky-notes.netlify.app/](https://drag-and-drop-sticky-notes.netlify.app/).
