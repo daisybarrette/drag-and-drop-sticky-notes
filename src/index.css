@@ -19,7 +19,7 @@ body {
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-body::before {
+/* body::before {
     content: '';
     display: block;
     position: absolute;
@@ -31,20 +31,43 @@ body::before {
     background: url(/public/cork-board.webp) var(--wood-light);
     background-position: center center;
     background-blend-mode: unset;
-}
+    background-size: contain;
+} */
 
 .App {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
+    font-size: 16px;
     font-size: calc(10px + 2vmin);
     color: var(--text);
-    position: relative;
+
+    /* for the background image... not sure if using yet */
+    /* position: relative; */
+}
+
+h1,
+h2 {
+    margin: 0;
+    padding: 0.5em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1em;
 }
 
 .listLayout {
     display: flex;
+    justify-content: space-evenly;
+
+    margin-top: 2em;
+
+    width: 100%;
+    overflow-x: auto;
+}
+
+.listContainer {
+    flex-basis: 9em;
 }
 
 #newNoteForm {
@@ -57,39 +80,35 @@ body::before {
     background-color: var(--paper);
     font-size: 1em;
 }
-/* @TODO customize focus & active styles for input */
 
-h2 {
-    margin: 1em 0 auto;
-}
-
-h2::before {
-    background-color: var(--paper);
-}
+/* #newNoteInput:focus,
+#newNoteInput:focus-visible {
+    border-width: 2px;
+    border-style: inset;
+    border-color: rgba(245, 245, 133, 1);
+} */
 
 .toDoNoteList,
 .completedNoteList {
     list-style: none;
-    background-color: var(--paper);
-    border-radius: 0.4em;
-    padding: 1em calc(2em + 2vw);
-    min-height: 18em;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    margin: 0;
 
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    min-height: 16em;
+    margin: 0;
+    padding: 0.1em calc(0.1em + 1vw);
+
+    background-color: var(--paper);
+    border-radius: 0.4em;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .toDoNoteList li,
 .completedNoteList li {
-    width: max-content;
     display: flex;
     flex-direction: column;
-
-    /* for debugging */
-    /* border: 2px solid green; */
+    width: max-content;
 }
 
 button.removeNote {
@@ -98,15 +117,18 @@ button.removeNote {
 
 .note {
     list-style-type: none;
+
+    margin: 0.6rem;
+    padding: calc(0.8rem + 2vw) calc(0.5rem + 2vw) calc(1rem + 5vw);
+    min-width: 4em;
+    max-width: 10em;
+
     background-color: rgb(245, 245, 133);
     background: radial-gradient(circle, rgba(255, 253, 171, 1) 0%, rgba(245, 245, 133, 1) 100%);
-    color: black;
-    padding: 2rem calc(1rem + 2vw) 4rem;
     border-radius: 0.4em;
-    font-family: 'Shadows Into Light', cursive;
-    margin: 0.6rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-    /* for debugging */
-    /* border: 2px solid purple; */
+    color: black;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 0.9em;
 }
