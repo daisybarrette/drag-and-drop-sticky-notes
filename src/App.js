@@ -72,48 +72,56 @@ function App() {
             <main>
                 <Form addNote={handleAddNote} />
 
-                <h2>To do:</h2>
                 <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId='toDoNoteList'>
-                        {(provided) => (
-                            <ul
-                                className='toDoNoteList'
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {provided.placeholder}
-                                {notes.toDoNoteList.map((note, index) => (
-                                    <Note
-                                        key={note.id}
-                                        note={note}
-                                        index={index}
-                                        handleRemoveNote={handleRemoveNote}
-                                    />
-                                ))}
-                            </ul>
-                        )}
-                    </Droppable>
+                    <div className='listLayout'>
+                        <Droppable droppableId='toDoNoteList'>
+                            {(provided) => (
+                                <div className='listContainer'>
+                                    <h2>To do:</h2>
 
-                    <h2>Completed:</h2>
-                    <Droppable droppableId='completedNoteList'>
-                        {(provided) => (
-                            <ul
-                                className='completedNoteList'
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {provided.placeholder}
-                                {notes.completedNoteList.map((note, index) => (
-                                    <Note
-                                        key={note.id}
-                                        note={note}
-                                        index={index}
-                                        handleRemoveNote={handleRemoveNote}
-                                    />
-                                ))}
-                            </ul>
-                        )}
-                    </Droppable>
+                                    <ul
+                                        className='toDoNoteList'
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {provided.placeholder}
+                                        {notes.toDoNoteList.map((note, index) => (
+                                            <Note
+                                                key={note.id}
+                                                note={note}
+                                                index={index}
+                                                handleRemoveNote={handleRemoveNote}
+                                            />
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </Droppable>
+
+                        <Droppable droppableId='completedNoteList'>
+                            {(provided) => (
+                                <div className='listContainer'>
+                                    <h2>Completed:</h2>
+
+                                    <ul
+                                        className='completedNoteList'
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {provided.placeholder}
+                                        {notes.completedNoteList.map((note, index) => (
+                                            <Note
+                                                key={note.id}
+                                                note={note}
+                                                index={index}
+                                                handleRemoveNote={handleRemoveNote}
+                                            />
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </Droppable>
+                    </div>
                 </DragDropContext>
             </main>
         </div>

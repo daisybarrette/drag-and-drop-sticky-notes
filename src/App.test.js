@@ -61,3 +61,13 @@ test('allows users to delete a To Do note', async () => {
 
     expect(toDoNoteList).toHaveLength(0)
 });
+
+test('allows users to delete a Completed note', async () => {
+    render(<App />);
+    const completedNoteList = document.getElementsByClassName('completedNoteList')[0].getElementsByTagName('li');
+    const removeButton = completedNoteList[0].childNodes[0]
+
+    fireEvent.click(removeButton)
+
+    expect(completedNoteList).toHaveLength(0)
+});
