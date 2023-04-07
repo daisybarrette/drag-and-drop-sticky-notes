@@ -15,6 +15,11 @@
     --dark-accent: #0077c0;
 }
 
+*::selection {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+}
+
 body {
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif;
