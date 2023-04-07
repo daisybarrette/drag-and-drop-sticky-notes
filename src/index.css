@@ -115,20 +115,27 @@ h2 {
 .completedNoteList li {
     display: flex;
     flex-direction: column;
-    width: max-content;
 }
 
 button.removeNote {
     align-self: flex-end;
+
+    border: 0;
+    border-radius: 0.25rem;
+    background: transparent;
+
+    font-size: 0.9em;
+    font-family: sans-serif;
+    position: relative;
+    top: 1.3em;
 }
 
 .note {
     list-style-type: none;
 
     margin: 0.6rem;
-    padding: calc(0.8rem + 2vw) calc(0.5rem + 2vw) calc(1rem + 5vw);
-    min-width: 4em;
-    max-width: 10em;
+    padding: calc(0.6rem + 2vw) calc(0.4rem + 2vw) calc(0.8rem + 3vw);
+    width: 5em;
 
     background-color: rgb(245, 245, 133);
     background: radial-gradient(circle, rgba(255, 253, 171, 1) 0%, rgba(245, 245, 133, 1) 100%);
@@ -137,7 +144,8 @@ button.removeNote {
 
     color: black;
     font-family: 'Shadows Into Light', cursive;
-    font-size: 0.9em;
+    font-size: min(16px, 1em);
+    overflow-x: auto;
 }
 
 footer {
