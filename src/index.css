@@ -127,7 +127,7 @@ button.removeNote {
     font-size: 0.9em;
     font-family: sans-serif;
     position: relative;
-    top: 1.3em;
+    top: 24px;
 }
 
 .note {
