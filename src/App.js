@@ -10,13 +10,8 @@ function App() {
         id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
         list: 'toDoNoteList',
     };
-    const sampleCompletedNote = {
-        content: 'buy groceries',
-        id: '19e6395a-0ba2-4ab5-x230-7e8325e5dd4a',
-        list: 'completedNoteList',
-    };
 
-    const [notes, setNotes] = useState({ toDoNoteList: [sampleNote], completedNoteList: [sampleCompletedNote] });
+    const [notes, setNotes] = useState({ toDoNoteList: [sampleNote], completedNoteList: [] });
 
     function handleAddNote(newNote) {
         const updatedNotes = {
