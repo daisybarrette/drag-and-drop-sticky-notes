@@ -123,7 +123,7 @@ function App() {
             <footer>
                 <p>
                     by <a href='https://www.daisybarrette.com/'>Daisy Barrette</a> on{' '}
-                    <a href='https://github.com/daisybarrette'>GitHub</a>
+                    <a href='https://github.com/daisybarrette/drag-and-drop-sticky-notes'>GitHub</a>
                 </p>
             </footer>
         </div>
