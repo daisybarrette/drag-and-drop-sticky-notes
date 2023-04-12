@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 function Form({ addNote }) {
@@ -35,4 +36,7 @@ function Form({ addNote }) {
     );
 }
 
+Form.propTypes = {
+    addNote: PropTypes.func.isRequired,
+}
 export default Form;

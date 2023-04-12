@@ -1,7 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
-
-// @TODO add proptypes
 
 function Note({ note, index, handleRemoveNote }) {
     return (
@@ -41,5 +40,15 @@ function Note({ note, index, handleRemoveNote }) {
         </Draggable>
     );
 }
+
+Note.propTypes = {
+    note: PropTypes.shape({
+        content: PropTypes.string,
+        id: PropTypes.string.isRequired,
+        list: PropTypes.string.isRequired,
+    }).isRequired,
+    index: PropTypes.number.isRequired,
+    handleRemoveNote: PropTypes.func.isRequired,
+};
 
 export default Note;
