@@ -111,6 +111,11 @@ h2 {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.listContainer .isBeingDraggedOver {
+    /* Switch box shadow to inset */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px inset;
+}
+
 .toDoNoteList li,
 .completedNoteList li {
     display: flex;
@@ -146,6 +151,10 @@ button.removeNote {
     font-family: 'Shadows Into Light', cursive;
     font-size: min(16px, 1em);
     overflow-x: auto;
+}
+
+.isBeingDragged .note {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 footer {

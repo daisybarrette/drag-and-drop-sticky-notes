@@ -70,12 +70,12 @@ function App() {
                 <DragDropContext onDragEnd={handleOnDragEnd}>
                     <div className='listLayout'>
                         <Droppable droppableId='toDoNoteList'>
-                            {(provided) => (
+                            {(provided, snapshot) => (
                                 <div className='listContainer'>
                                     <h2>To do:</h2>
 
                                     <ul
-                                        className='toDoNoteList'
+                                        className={snapshot.isDraggingOver ? 'toDoNoteList isBeingDraggedOver':'toDoNoteList'}
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                     >
@@ -94,12 +94,12 @@ function App() {
                         </Droppable>
 
                         <Droppable droppableId='completedNoteList'>
-                            {(provided) => (
+                            {(provided, snapshot) => (
                                 <div className='listContainer'>
                                     <h2>Completed:</h2>
 
                                     <ul
-                                        className='completedNoteList'
+                                        className={snapshot.isDraggingOver ? 'completedNoteList isBeingDraggedOver':'completedNoteList'}
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                     >

@@ -9,13 +9,14 @@ function Note({ note, index, handleRemoveNote }) {
             draggableId={note.id}
             index={index}
         >
-            {(provided) => (
+            {(provided, snapshot) => (
                 <li
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     index={index}
                     key={note.id}
+                    className={snapshot.isDragging ? 'isBeingDragged' : ''}
                 >
                     <button
                         className='removeNote'
