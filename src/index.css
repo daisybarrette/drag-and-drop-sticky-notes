@@ -69,7 +69,6 @@ h2 {
     margin-bottom: 1em;
 
     width: 100%;
-    overflow-x: auto;
 }
 
 .listContainer {
@@ -102,7 +101,11 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     min-height: 16em;
+    max-height: 80vh;
+    overflow-y: auto;
+
     margin: 0;
     padding: 0.1em calc(0.1em + 1vw);
 

@@ -13,7 +13,6 @@ function Note({ note, index, handleRemoveNote }) {
                 <li
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}
                     index={index}
                     key={note.id}
                     className={snapshot.isDragging ? 'isBeingDragged' : ''}
@@ -35,7 +34,13 @@ function Note({ note, index, handleRemoveNote }) {
                             <path d='M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z' />
                         </svg>
                     </button>
-                    <div className='note'>{`${note.content}`}</div>
+
+                    <div
+                        className='note'
+                        {...provided.dragHandleProps}
+                    >
+                        {`${note.content}`}
+                    </div>
                 </li>
             )}
         </Draggable>
