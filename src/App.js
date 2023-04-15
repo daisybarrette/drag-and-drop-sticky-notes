@@ -1,17 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import Note from './components/Note';
 import Form from './components/Form';
 
-function App() {
-    const sampleNote = {
-        content: 'Start my to-do list',
-        id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
-        list: 'toDoNoteList',
-    };
+const sampleNote = {
+    content: 'Start my to-do list',
+    id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
+    list: 'toDoNoteList',
+};
 
-    const [notes, setNotes] = useState({ toDoNoteList: [sampleNote], completedNoteList: [] });
+function App() {
+    // const storedNotes = JSON.parse(localStorage.getItem('myTest'))
+    // console.log('my test item...........', myTest);
+
+    const [notes, setNotes] = useState({ toDoNoteList: [], completedNoteList: [] });
+
+    // useEffect(() => {
+    //     const items = JSON.parse(localStorage.getItem('items'));
+    //     if (items) {
+    //      setItems(items);
+    //     }
+    //   }, []);
+
+    useEffect(() => {
+        const stringNotes = localStorage.getItem('notes');
+        const storedNotes = JSON.parse(JSON.parse(localStorage.getItem('notes')));
+
+        console.log('the stored notes...........');
+        console.log(stringNotes, typeof stringNotes);
+        console.log('does this work', storedNotes, typeof storedNotes);
+        console.log('...........');
+
+        const updatedNotes = { toDoNoteList: [], completedNoteList: [] };
+
+
+        if (storedNotes?.toDoNoteList?.length) {
+            console.log('okay so', storedNotes);
+            updatedNotes.toDoNoteList = storedNotes.toDoNoteList;
+        }
+
+        if (storedNotes?.completedNoteList?.length) {
+            console.log('okay so', storedNotes);
+            updatedNotes.completedNoteList = storedNotes.completedNoteList;
+        }
+
+        setNotes(updatedNotes);
+
+        // if (!storedNotes) {
+        //     setNotes({ toDoNoteList: [sampleNote], completedNoteList: [] });
+        // }
+
+        // if (storedNotes?.toDoNoteList?.length) {
+        //     console.log(storedNotes?.toDoNoteList);
+        // }
+    }, []);
+
+    useEffect(() => {
+        // console.log('notes', notes)
+
+        const notesToSave = JSON.stringify(notes);
+        // console.log('these should be saved',notesToSave)
+
+        localStorage.setItem('notes', JSON.stringify(notesToSave));
+    }, [notes]);
 
     function handleAddNote(newNote) {
         const updatedNotes = {
@@ -75,12 +127,14 @@ function App() {
                                     <h2>To do:</h2>
 
                                     <ul
-                                        className={snapshot.isDraggingOver ? 'toDoNoteList isBeingDraggedOver':'toDoNoteList'}
+                                        className={
+                                            snapshot.isDraggingOver ? 'toDoNoteList isBeingDraggedOver' : 'toDoNoteList'
+                                        }
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                     >
                                         {provided.placeholder}
-                                        {notes.toDoNoteList.map((note, index) => (
+                                        {notes.toDoNoteList?.map((note, index) => (
                                             <Note
                                                 key={note.id}
                                                 note={note}
@@ -99,7 +153,11 @@ function App() {
                                     <h2>Completed:</h2>
 
                                     <ul
-                                        className={snapshot.isDraggingOver ? 'completedNoteList isBeingDraggedOver':'completedNoteList'}
+                                        className={
+                                            snapshot.isDraggingOver
+                                                ? 'completedNoteList isBeingDraggedOver'
+                                                : 'completedNoteList'
+                                        }
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                     >
