@@ -76,12 +76,14 @@ function App() {
                     <div className='listLayout'>
                         <DroppableList
                             listName={LIST_NAMES.TO_DO}
+                            title="To do:"
                             notes={notes}
                             handleRemoveNote={handleRemoveNote}
                         />
 
                         <DroppableList
                             listName={LIST_NAMES.COMPLETED}
+                            title="Completed:"
                             notes={notes}
                             handleRemoveNote={handleRemoveNote}
                         />
