@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 
-import Note from './components/Note';
 import Form from './components/Form';
+import DroppableList from './components/DroppableList';
 
 const LIST_NAMES = {
     TO_DO: 'toDoNoteList',
     COMPLETED: 'completedNoteList',
-}
+};
 
 function App() {
     const sampleNote = {
@@ -74,53 +74,17 @@ function App() {
 
                 <DragDropContext onDragEnd={handleOnDragEnd}>
                     <div className='listLayout'>
-                        <Droppable droppableId={LIST_NAMES.TO_DO}>
-                            {(provided, snapshot) => (
-                                <div className='listContainer'>
-                                    <h2>To do:</h2>
+                        <DroppableList
+                            listName={LIST_NAMES.TO_DO}
+                            notes={notes}
+                            handleRemoveNote={handleRemoveNote}
+                        />
 
-                                    <ul
-                                        className={snapshot.isDraggingOver ? 'toDoNoteList isBeingDraggedOver':'toDoNoteList'}
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        {provided.placeholder}
-                                        {notes.toDoNoteList.map((note, index) => (
-                                            <Note
-                                                key={note.id}
-                                                note={note}
-                                                index={index}
-                                                handleRemoveNote={handleRemoveNote}
-                                            />
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </Droppable>
-
-                        <Droppable droppableId={LIST_NAMES.COMPLETED}>
-                            {(provided, snapshot) => (
-                                <div className='listContainer'>
-                                    <h2>Completed:</h2>
-
-                                    <ul
-                                        className={snapshot.isDraggingOver ? 'completedNoteList isBeingDraggedOver':'completedNoteList'}
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        {provided.placeholder}
-                                        {notes.completedNoteList.map((note, index) => (
-                                            <Note
-                                                key={note.id}
-                                                note={note}
-                                                index={index}
-                                                handleRemoveNote={handleRemoveNote}
-                                            />
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </Droppable>
+                        <DroppableList
+                            listName={LIST_NAMES.COMPLETED}
+                            notes={notes}
+                            handleRemoveNote={handleRemoveNote}
+                        />
                     </div>
                 </DragDropContext>
             </main>
