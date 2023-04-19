@@ -4,19 +4,24 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Note from './components/Note';
 import Form from './components/Form';
 
+const LIST_NAMES = {
+    TO_DO: 'toDoNoteList',
+    COMPLETED: 'completedNoteList',
+}
+
 function App() {
     const sampleNote = {
         content: 'Start my to-do list',
         id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
-        list: 'toDoNoteList',
+        list: LIST_NAMES.TO_DO,
     };
 
-    const [notes, setNotes] = useState({ toDoNoteList: [sampleNote], completedNoteList: [] });
+    const [notes, setNotes] = useState({ [LIST_NAMES.TO_DO]: [sampleNote], [LIST_NAMES.COMPLETED]: [] });
 
     function handleAddNote(newNote) {
         const updatedNotes = {
-            toDoNoteList: [...notes.toDoNoteList, newNote],
-            completedNoteList: [...notes.completedNoteList],
+            [LIST_NAMES.TO_DO]: [...notes[LIST_NAMES.TO_DO], newNote],
+            [LIST_NAMES.COMPLETED]: [...notes[LIST_NAMES.COMPLETED]],
         };
 
         setNotes(updatedNotes);
@@ -24,8 +29,8 @@ function App() {
 
     function handleRemoveNote(noteList, noteIndex) {
         const updatedNotes = {
-            toDoNoteList: [...notes.toDoNoteList],
-            completedNoteList: [...notes.completedNoteList],
+            [LIST_NAMES.TO_DO]: [...notes[LIST_NAMES.TO_DO]],
+            [LIST_NAMES.COMPLETED]: [...notes[LIST_NAMES.COMPLETED]],
         };
 
         updatedNotes[noteList].splice(noteIndex, 1);
@@ -48,8 +53,8 @@ function App() {
         const droppedNote = notes[sourceList][source.index];
 
         const updatedNotes = {
-            toDoNoteList: [...notes.toDoNoteList],
-            completedNoteList: [...notes.completedNoteList],
+            [LIST_NAMES.TO_DO]: [...notes[LIST_NAMES.TO_DO]],
+            [LIST_NAMES.COMPLETED]: [...notes[LIST_NAMES.COMPLETED]],
         };
 
         updatedNotes[sourceList].splice(source.index, 1);
@@ -69,7 +74,7 @@ function App() {
 
                 <DragDropContext onDragEnd={handleOnDragEnd}>
                     <div className='listLayout'>
-                        <Droppable droppableId='toDoNoteList'>
+                        <Droppable droppableId={LIST_NAMES.TO_DO}>
                             {(provided, snapshot) => (
                                 <div className='listContainer'>
                                     <h2>To do:</h2>
@@ -93,7 +98,7 @@ function App() {
                             )}
                         </Droppable>
 
-                        <Droppable droppableId='completedNoteList'>
+                        <Droppable droppableId={LIST_NAMES.COMPLETED}>
                             {(provided, snapshot) => (
                                 <div className='listContainer'>
                                     <h2>Completed:</h2>
