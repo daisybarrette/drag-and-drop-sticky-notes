@@ -2,31 +2,37 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
-beforeEach(() => {
-    render(<App />);
-});
-
 it('renders the heading', () => {
+    render(<App />);
+
     const heading = screen.getByText(/Drag and drop sticky notes/i);
     expect(heading).toBeInTheDocument();
 });
 
 it('renders the list of notes', () => {
+    render(<App />);
+
     const list = document.getElementsByClassName('noteList');
     expect(list).toBeTruthy();
 });
 
 it('renders the sample note', () => {
+    render(<App />);
+
     const noteList = document.getElementsByTagName('li');
     expect(noteList[0]).toHaveTextContent('Start my to-do list');
 });
 
 it('contains the new note input', () => {
+    render(<App />);
+
     const newNoteInput = document.getElementById('newNoteInput');
     expect(newNoteInput).toBeEnabled();
 });
 
 it('allows the user to type a new note', async () => {
+    render(<App />);
+
     const newNoteInput = document.getElementById('newNoteInput');
 
     userEvent.type(newNoteInput, 'hello world');
@@ -40,6 +46,8 @@ it('allows the user to type a new note', async () => {
 });
 
 it('saves the new note in the note list when the form is submitted', async () => {
+    render(<App />);
+
     const newNoteInput = document.getElementById('newNoteInput');
 
     userEvent.type(newNoteInput, 'hello world');
@@ -51,6 +59,8 @@ it('saves the new note in the note list when the form is submitted', async () =>
 });
 
 it('allows users to delete a To Do note', async () => {
+    render(<App />);
+
     const toDoNoteList = document.getElementsByClassName('toDoNoteList')[0].getElementsByTagName('li');
     const removeButton = toDoNoteList[0].childNodes[0];
 
