@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within} from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -15,15 +15,15 @@ it('renders the lists', () => {
     const toDoList = screen.getByTestId('toDoNoteList');
     const completedList = screen.getByTestId('completedNoteList');
 
-    expect(toDoList).toBeInTheDocument()
-    expect(completedList).toBeInTheDocument()
+    expect(toDoList).toBeInTheDocument();
+    expect(completedList).toBeInTheDocument();
 });
 
 it('renders the sample note', () => {
     render(<App />);
 
     const toDoList = screen.getByTestId('toDoNoteList');
-    const firstToDo = within(toDoList).getAllByRole('listitem')[0]
+    const firstToDo = within(toDoList).getAllByRole('listitem')[0];
     expect(firstToDo).toHaveTextContent('Start my to-do list');
 });
 
@@ -65,12 +65,14 @@ it('saves the new note in the note list when the form is submitted', async () =>
 it('allows users to delete a To Do note', async () => {
     render(<App />);
 
-    const toDoNoteList = document.getElementsByClassName('toDoNoteList')[0].getElementsByTagName('li');
-    const removeButton = toDoNoteList[0].childNodes[0];
+    const toDoList = screen.getByTestId('toDoNoteList');
+    const firstToDo = within(toDoList).getAllByRole('listitem')[0];
+
+    const removeButton = within(firstToDo).getByLabelText('Delete note');
 
     fireEvent.click(removeButton);
 
-    expect(toDoNoteList).toHaveLength(0);
+    expect(toDoList.childNodes).toHaveLength(0);
 });
 
 it.skip('allows users to delete a Completed note', async () => {
