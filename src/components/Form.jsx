@@ -23,11 +23,13 @@ function Form({ addNote }) {
     return (
         <form
             id='newNoteForm'
+            data-testid='newNoteForm'
             onSubmit={handleSubmit}
         >
             <label htmlFor='newNoteInput'>Add a new note: </label>
             <input
                 id='newNoteInput'
+                data-testid='newNoteInput'
                 type='text'
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -38,5 +40,5 @@ function Form({ addNote }) {
 
 Form.propTypes = {
     addNote: PropTypes.func.isRequired,
-}
+};
 export default Form;

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -9,38 +9,42 @@ it('renders the heading', () => {
     expect(heading).toBeInTheDocument();
 });
 
-it('renders the list of notes', () => {
+it('renders the lists', () => {
     render(<App />);
 
-    const list = document.getElementsByClassName('noteList');
-    expect(list).toBeTruthy();
+    const toDoList = screen.getByTestId('toDoNoteList');
+    const completedList = screen.getByTestId('completedNoteList');
+
+    expect(toDoList).toBeInTheDocument()
+    expect(completedList).toBeInTheDocument()
 });
 
 it('renders the sample note', () => {
     render(<App />);
 
-    const noteList = document.getElementsByTagName('li');
-    expect(noteList[0]).toHaveTextContent('Start my to-do list');
+    const toDoList = screen.getByTestId('toDoNoteList');
+    const firstToDo = within(toDoList).getAllByRole('listitem')[0]
+    expect(firstToDo).toHaveTextContent('Start my to-do list');
 });
 
 it('contains the new note input', () => {
     render(<App />);
 
-    const newNoteInput = document.getElementById('newNoteInput');
+    const newNoteInput = screen.getByTestId('newNoteInput');
     expect(newNoteInput).toBeEnabled();
 });
 
 it('allows the user to type a new note', async () => {
     render(<App />);
 
-    const newNoteInput = document.getElementById('newNoteInput');
+    const newNoteInput = screen.getByTestId('newNoteInput');
 
     userEvent.type(newNoteInput, 'hello world');
     expect(newNoteInput.value).toBe('hello world');
 
-    fireEvent.submit(document.getElementById('newNoteForm'));
+    fireEvent.submit(screen.getByTestId('newNoteForm'));
 
-    const noteList = document.getElementsByTagName('li');
+    const noteList = screen.getAllByRole('listitem');
 
     expect(noteList[1]).toHaveTextContent('hello world');
 });
@@ -48,12 +52,12 @@ it('allows the user to type a new note', async () => {
 it('saves the new note in the note list when the form is submitted', async () => {
     render(<App />);
 
-    const newNoteInput = document.getElementById('newNoteInput');
+    const newNoteInput = screen.getByTestId('newNoteInput');
 
     userEvent.type(newNoteInput, 'hello world');
-    fireEvent.submit(document.getElementById('newNoteForm'));
+    fireEvent.submit(screen.getByTestId('newNoteForm'));
 
-    const noteList = document.getElementsByTagName('li');
+    const noteList = screen.getAllByRole('listitem');
 
     expect(noteList[1]).toHaveTextContent('hello world');
 });

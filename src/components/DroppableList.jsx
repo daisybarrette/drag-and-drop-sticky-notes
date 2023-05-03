@@ -12,6 +12,7 @@ function DroppableList({ listName,title, notes, handleRemoveNote }) {
 
                     <ul
                         className={snapshot.isDraggingOver ? `${listName} isBeingDraggedOver` : listName}
+                        data-testid={listName}
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
