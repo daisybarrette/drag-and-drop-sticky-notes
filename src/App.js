@@ -3,13 +3,21 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import Form from './components/Form';
 import DroppableList from './components/DroppableList';
+import ThemeContext from './components/ThemeContext';
 
 const LIST_NAMES = {
     TO_DO: 'toDoNoteList',
     COMPLETED: 'completedNoteList',
 };
 
+const THEMES = {
+    LIGHT: 'light',
+    DARK: 'dark',
+};
+
 function App() {
+    const [theme, setTheme] = useState(THEMES.LIGHT);
+
     const sampleNote = {
         content: 'Start my to-do list',
         id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
@@ -64,40 +72,42 @@ function App() {
     }
 
     return (
-        <div className='App'>
-            <header>
-                <h1>Drag and drop sticky notes</h1>
-            </header>
+        <ThemeContext.Provider value={theme}>
+            <div className='App'>
+                <header>
+                    <h1>Drag and drop sticky notes</h1>
+                </header>
 
-            <main>
-                <Form addNote={handleAddNote} />
+                <main>
+                    <Form addNote={handleAddNote} />
 
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <div className='listLayout'>
-                        <DroppableList
-                            listName={LIST_NAMES.TO_DO}
-                            title="To do:"
-                            notes={notes}
-                            handleRemoveNote={handleRemoveNote}
-                        />
+                    <DragDropContext onDragEnd={handleOnDragEnd}>
+                        <div className='listLayout'>
+                            <DroppableList
+                                listName={LIST_NAMES.TO_DO}
+                                title='To do:'
+                                notes={notes}
+                                handleRemoveNote={handleRemoveNote}
+                            />
 
-                        <DroppableList
-                            listName={LIST_NAMES.COMPLETED}
-                            title="Completed:"
-                            notes={notes}
-                            handleRemoveNote={handleRemoveNote}
-                        />
-                    </div>
-                </DragDropContext>
-            </main>
+                            <DroppableList
+                                listName={LIST_NAMES.COMPLETED}
+                                title='Completed:'
+                                notes={notes}
+                                handleRemoveNote={handleRemoveNote}
+                            />
+                        </div>
+                    </DragDropContext>
+                </main>
 
-            <footer>
-                <p>
-                    by <a href='https://www.daisybarrette.com/'>Daisy Barrette</a> on{' '}
-                    <a href='https://github.com/daisybarrette/drag-and-drop-sticky-notes'>GitHub</a>
-                </p>
-            </footer>
-        </div>
+                <footer>
+                    <p>
+                        by <a href='https://www.daisybarrette.com/'>Daisy Barrette</a> on{' '}
+                        <a href='https://github.com/daisybarrette/drag-and-drop-sticky-notes'>GitHub</a>
+                    </p>
+                </footer>
+            </div>
+        </ThemeContext.Provider>
     );
 }
 
