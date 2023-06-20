@@ -73,9 +73,21 @@ function App() {
 
     return (
         <ThemeContext.Provider value={theme}>
-            <div className='App'>
+            <div className={`App theme-${theme}`}>
+                <label>
+                    <input
+                        type='checkbox'
+                        checked={theme === THEMES.DARK}
+                        onChange={(e) => {
+                            setTheme(e.target.checked ? THEMES.DARK : THEMES.LIGHT);
+                        }}
+                    />
+                    Use dark mode
+                </label>
+
                 <header>
-                    <h1>Drag and drop sticky notes</h1>
+                    {/* <h1>Drag and drop sticky notes</h1> */}
+                        <h1>{`The theme is ${theme}`}</h1>
                 </header>
 
                 <main>
