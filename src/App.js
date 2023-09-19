@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import Form from './components/Form';
@@ -16,7 +16,21 @@ function App() {
         list: LIST_NAMES.TO_DO,
     };
 
-    const [notes, setNotes] = useState({ [LIST_NAMES.TO_DO]: [sampleNote], [LIST_NAMES.COMPLETED]: [] });
+    const [notes, setNotes] = useState(() => {
+        const savedNoteData = localStorage.getItem('userNotes');
+
+        // console.log('saved note date', savedNoteData);
+
+        const initialValue = savedNoteData ? JSON.parse(savedNoteData) : null;
+        // console.log('initial value' ,initialValue);
+
+        const defaultNotes = { [LIST_NAMES.TO_DO]: [sampleNote], [LIST_NAMES.COMPLETED]: [] };
+
+        return initialValue || defaultNotes;
+        // return defaultNotes;
+    });
+
+    // console.log('notes', notes);
 
     function handleAddNote(newNote) {
         const updatedNotes = {
@@ -36,6 +50,12 @@ function App() {
         updatedNotes[noteList].splice(noteIndex, 1);
         setNotes(updatedNotes);
     }
+
+    useEffect(() => {
+        // console.log('updating notes...');
+        localStorage.removeItem('userNotes');
+        localStorage.setItem('userNotes', JSON.stringify(notes));
+    }, [notes]);
 
     function handleOnDragEnd(result) {
         const { destination, source } = result;
