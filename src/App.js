@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import Form from './components/Form';
@@ -9,14 +9,21 @@ const LIST_NAMES = {
     COMPLETED: 'completedNoteList',
 };
 
-function App() {
-    const sampleNote = {
-        content: 'Start my to-do list',
-        id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
-        list: LIST_NAMES.TO_DO,
-    };
+const sampleNote = {
+    content: 'Start my to-do list',
+    id: '5ee6395a-0ba2-4ab5-9230-de8325e5dd65',
+    list: LIST_NAMES.TO_DO,
+};
 
-    const [notes, setNotes] = useState({ [LIST_NAMES.TO_DO]: [sampleNote], [LIST_NAMES.COMPLETED]: [] });
+const defaultNotes = { [LIST_NAMES.TO_DO]: [sampleNote], [LIST_NAMES.COMPLETED]: [] };
+
+function App() {
+    const [notes, setNotes] = useState(() => {
+        const savedNoteData = localStorage.getItem('userNotes');
+        const initialValue = savedNoteData ? JSON.parse(savedNoteData) : null;
+
+        return initialValue || defaultNotes;
+    });
 
     function handleAddNote(newNote) {
         const updatedNotes = {
@@ -36,6 +43,11 @@ function App() {
         updatedNotes[noteList].splice(noteIndex, 1);
         setNotes(updatedNotes);
     }
+
+    useEffect(() => {
+        localStorage.removeItem('userNotes');
+        localStorage.setItem('userNotes', JSON.stringify(notes));
+    }, [notes]);
 
     function handleOnDragEnd(result) {
         const { destination, source } = result;
@@ -76,14 +88,14 @@ function App() {
                     <div className='listLayout'>
                         <DroppableList
                             listName={LIST_NAMES.TO_DO}
-                            title="To do:"
+                            title='To do:'
                             notes={notes}
                             handleRemoveNote={handleRemoveNote}
                         />
 
                         <DroppableList
                             listName={LIST_NAMES.COMPLETED}
-                            title="Completed:"
+                            title='Completed:'
                             notes={notes}
                             handleRemoveNote={handleRemoveNote}
                         />
